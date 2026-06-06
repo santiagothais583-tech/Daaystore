@@ -236,5 +236,29 @@ async function carregar() {
 carregar();
 </script>
 
+<!-- Netlify Identity: trata convite/recuperacao de senha e leva ao painel /admin -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  (function () {
+    // Se o convite/recuperacao chegar na home (com #...token), abre a janela de senha aqui mesmo.
+    var hash = window.location.hash || "";
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", function (user) {
+        if (!user) {
+          window.netlifyIdentity.on("login", function () {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+      // Abre automaticamente a tela de criar senha quando vier um token de convite/recuperacao
+      if (hash.indexOf("invite_token") !== -1 || hash.indexOf("recovery_token") !== -1) {
+        window.netlifyIdentity.on("init", function () {
+          window.netlifyIdentity.open();
+        });
+      }
+    }
+  })();
+</script>
+
 </body>
 </html>
