@@ -1,0 +1,44 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "imagens/produtos"
+public_folder: "/imagens/produtos"
+
+locale: "pt"
+
+collections:
+  - name: "config"
+    label: "1. Informações da Loja"
+    files:
+      - name: "loja"
+        label: "Dados da Loja"
+        file: "dados/config.json"
+        fields:
+          - { name: "nome", label: "Nome da loja", widget: "string" }
+          - { name: "slogan", label: "Slogan", widget: "string" }
+          - { name: "sobre", label: "Texto sobre a loja", widget: "text" }
+          - { name: "whatsapp", label: "WhatsApp (só números com 55, ex: 5547991843203)", widget: "string" }
+          - { name: "instagram", label: "Link do Instagram", widget: "string", required: false }
+          - { name: "endereco", label: "Endereço (opcional)", widget: "string", required: false }
+
+  - name: "catalogo"
+    label: "2. Produtos"
+    files:
+      - name: "produtos"
+        label: "Lista de Produtos"
+        file: "dados/produtos.json"
+        fields:
+          - name: "produtos"
+            label: "Produtos"
+            label_singular: "Produto"
+            widget: "list"
+            summary: "{{fields.nome}} — R$ {{fields.preco}}"
+            fields:
+              - { name: "nome", label: "Nome do produto", widget: "string" }
+              - name: "categoria"
+                label: "Categoria"
+                widget: "select"
+                options: ["Lingerie", "Babydoll", "Camisolas", "Sexy Shop"]
+              - { name: "preco", label: "Preço (ex: 89,90)", widget: "string" }
+              - { name: "foto", label: "Foto do produto", widget: "image" }
