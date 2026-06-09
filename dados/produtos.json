@@ -41,6 +41,13 @@
       "preco": "149,90",
       "descricao": "Kit especial para apimentar a relação.",
       "foto": "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=600&q=80"
+    },
+    {
+      "foto": "/imagens/produtos/img_4981.jpeg",
+      "descricao": "Conjunto rendado cappuccino \n🤎 Renda floral delicada\n🤎 Toque macio e confortável\n🤎 Modelagem que valoriza o corpo",
+      "preco": "89,99",
+      "categoria": "Conjunto rendado ",
+      "nome": "Conjunto cappuccino "
     }
   ]
 }
