@@ -62,6 +62,13 @@
       "preco": "159,99",
       "categoria": "Camisola com hobby ",
       "descricao": "Uma peça perfeita para quem busca elegância, conforto e um toque de sensualidade, destacando a beleza feminina com delicadeza e sofisticação."
+    },
+    {
+      "nome": "Sutiã de amamentação ",
+      "categoria": "Sutiã de amamentação ",
+      "preco": "79,99",
+      "descricao": "Peça confortável e elegante para os momentos necessários ",
+      "foto": "/imagens/produtos/b6b5a016-fe21-43cc-ac06-851b3f562393.jpeg"
     }
   ]
 }
