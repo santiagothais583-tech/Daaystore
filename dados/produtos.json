@@ -1,53 +1,18 @@
 {
   "produtos": [
     {
-      "nome": "Conjunto Renda Delicada teste",
-      "categoria": "Lingerie",
-      "preco": "89,90",
-      "descricao": "Conjunto em renda com acabamento delicado.",
-      "foto": "/imagens/produtos/create_a_single_premium_vertical_infographic_mind_-1777828286690.png"
-    },
-    {
-      "nome": "Sutiã Cetim Premium",
-      "categoria": "Lingerie",
-      "preco": "69,90",
-      "descricao": "Sutiã em cetim macio e confortável.",
-      "foto": "https://images.unsplash.com/photo-1582142306909-195724d33ffc?w=600&q=80"
-    },
-    {
-      "nome": "Babydoll Renda Sensual",
-      "categoria": "Babydoll",
-      "preco": "119,90",
-      "descricao": "Babydoll em renda para momentos especiais.",
-      "foto": "https://images.unsplash.com/photo-1617331721458-bd3bd3f9c7f8?w=600&q=80"
-    },
-    {
-      "nome": "Babydoll Cetim Luxo",
-      "categoria": "Babydoll",
-      "preco": "139,90",
-      "descricao": "Babydoll de cetim com toque luxuoso.",
-      "foto": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&q=80"
-    },
-    {
-      "nome": "Camisola Longa Elegante",
-      "categoria": "Camisolas",
-      "preco": "99,90",
-      "descricao": "Camisola longa elegante e fluida.",
-      "foto": "https://images.unsplash.com/photo-1606902965551-dce093cda6e7?w=600&q=80"
-    },
-    {
-      "nome": "Kit Sensual Especial",
-      "categoria": "Sexy Shop",
-      "preco": "149,90",
-      "descricao": "Kit especial para apimentar a relação.",
-      "foto": "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=600&q=80"
-    },
-    {
       "foto": "/imagens/produtos/img_4981.jpeg",
       "descricao": "Conjunto rendado cappuccino \n🤎 Renda floral delicada\n🤎 Toque macio e confortável\n🤎 Modelagem que valoriza o corpo",
       "preco": "89,99",
       "categoria": "Conjunto rendado ",
       "nome": "Conjunto cappuccino "
+    },
+    {
+      "foto": "/imagens/produtos/img_4980.jpeg",
+      "descricao": "(Sutiã, fio, cinta, meias, luvas, jacarezinho para prender a cinta nas meias)\nConjunto maravilhoso, completo e muito sensual.",
+      "nome": "Conjunto rebecca",
+      "categoria": "Lingerie sensual ",
+      "preco": "139,99"
     }
   ]
 }
