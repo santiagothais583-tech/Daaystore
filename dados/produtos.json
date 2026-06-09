@@ -29,13 +29,6 @@
       "foto": "/imagens/produtos/9153e41a-cb79-492e-9314-6846c44de1d9.jpeg"
     },
     {
-      "foto": "/imagens/produtos/edcdb675-6f9d-4262-a894-caa0f645966e.jpeg",
-      "descricao": "* Microfibra leve, macia e confortável\n* Renda floral branca de acabamento delicado\n* Alças finas reguláveis\n* Decote em V que valoriza o colo\n* Barra com aplicação de renda em toda a extensão\n* Acompanha calcinha fio com detalhes rendados\n* Excelente caimento e conforto para o dia a dia ou ocasiões especiais",
-      "nome": "Camisola azul serenity ",
-      "categoria": "Camisola ",
-      "preco": "79,99"
-    },
-    {
       "foto": "/imagens/produtos/19b53897-3b17-448d-9985-f6e79de1bd94.jpeg",
       "preco": "79,99",
       "descricao": "* Microfibra leve, macia e confortável\n* Renda floral preta de alta delicadeza\n* Alças finas reguláveis\n* Decote em V que valoriza o busto\n* Barra com acabamento rendado\n* Acompanha calcinha fio rendada\n* Excelente caimento e toque suave",
@@ -43,11 +36,25 @@
       "categoria": "Camisola "
     },
     {
+      "foto": "/imagens/produtos/edcdb675-6f9d-4262-a894-caa0f645966e.jpeg",
+      "descricao": "* Microfibra leve, macia e confortável\n* Renda floral branca de acabamento delicado\n* Alças finas reguláveis\n* Decote em V que valoriza o colo\n* Barra com aplicação de renda em toda a extensão\n* Acompanha calcinha fio com detalhes rendados\n* Excelente caimento e conforto para o dia a dia ou ocasiões especiais",
+      "nome": "Camisola azul serenity ",
+      "categoria": "Camisola ",
+      "preco": "79,99"
+    },
+    {
       "foto": "/imagens/produtos/15a74e7e-cda6-4b7e-aeb3-44b6ad8576bb.jpeg",
       "preco": "79,99",
       "descricao": "* Microfibra macia e confortável\n* Renda floral branca de acabamento delicado\n* Alças finas reguláveis\n* Decote em V que valoriza o busto\n* Barra rendada com acabamento sofisticado\n* Acompanha calcinha fio rendada\n* Modelagem leve e excelente caimento",
       "categoria": "Camisola ",
       "nome": "Camisola bombom "
+    },
+    {
+      "foto": "/imagens/produtos/f017e4ec-df69-46cf-8bc3-1c69ee16d77c.jpeg",
+      "preco": "79,99",
+      "nome": "Camisola ",
+      "categoria": "Camisola ",
+      "descricao": "\n* Renda delicada com transparência sofisticada\n* Alças finas reguláveis\n* Decote em V que valoriza o busto\n* Detalhes rendados na cintura e na barra\n* Modelagem fluida com excelente caimento\n* Visual elegante e sensual na medida certa"
     }
   ]
 }
