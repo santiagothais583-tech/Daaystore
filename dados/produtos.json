@@ -96,6 +96,13 @@
       "nome": "Babydoll ",
       "categoria": "Babydoll ",
       "preco": "64,99"
+    },
+    {
+      "nome": "Babydoll Liz ",
+      "categoria": "Babydoll ",
+      "preco": "64,99",
+      "descricao": "um modelo romântico e elegante, ideal para quem gosta de peças florais com um toque sensual proporcionado pela renda.",
+      "foto": "/imagens/produtos/6700a92f-62ca-4090-895a-dd2df4765b47.jpeg"
     }
   ]
 }
