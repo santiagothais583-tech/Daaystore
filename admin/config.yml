@@ -2,6 +2,7 @@ backend:
   name: github
   repo: santiagothais583-tech/Daaystore
   branch: main
+  auth_type: pat
 
 media_folder: "imagens/produtos"
 public_folder: "/imagens/produtos"
