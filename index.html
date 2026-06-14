@@ -310,21 +310,5 @@ document.getElementById('nav-toggle').addEventListener('click', function(){ docu
 carregar();
 </script>
 
-<!-- Netlify Identity: trata convite/recuperação de senha e leva ao painel /admin -->
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-<script>
-  (function () {
-    var hash = window.location.hash || "";
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", function (user) {
-        if (!user) { window.netlifyIdentity.on("login", function () { document.location.href = "/admin/"; }); }
-      });
-      if (hash.indexOf("invite_token") !== -1 || hash.indexOf("recovery_token") !== -1) {
-        window.netlifyIdentity.on("init", function () { window.netlifyIdentity.open(); });
-      }
-    }
-  })();
-</script>
-
 </body>
 </html>
