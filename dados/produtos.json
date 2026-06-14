@@ -1,18 +1,11 @@
 {
   "produtos": [
     {
-      "nome": "Sexy shop",
+      "nome": "Sexy shop D4",
       "categoria": "Sexy shop",
-      "preco": "23,99",
-      "descricao": "",
-      "foto": "/imagens/produtos/7c86d7d2-6206-46ea-b779-29baf2fe922d.jpeg"
-    },
-    {
-      "nome": "Sexy shop",
-      "categoria": "Sexy shop",
-      "preco": "23,99",
-      "descricao": "",
-      "foto": "/imagens/produtos/6e44ac6e-e8d5-4bfb-be25-8aac097dfe56.jpeg"
+      "preco": "34,99",
+      "descricao": "O D4 Lubrificante Íntimo Beijável é o produto perfeito para essa missão! Á base de água, ele é indicado para a penetração vaginal, anal e também para o sexo oral. Além disso, esse gel é compatível com camisinha.",
+      "foto": "/imagens/produtos/3a781f7e-5dba-4dbd-a119-abfb84aa1538.jpeg"
     },
     {
       "nome": "Camisola Tifany",
@@ -41,6 +34,13 @@
       "preco": "23,89",
       "descricao": "",
       "foto": "/imagens/produtos/3a781f7e-5dba-4dbd-a119-abfb84aa1538.jpeg"
+    },
+    {
+      "nome": "Babydoll",
+      "categoria": "Babydoll",
+      "preco": "109,99",
+      "descricao": "",
+      "foto": "/imagens/produtos/6700a92f-62ca-4090-895a-dd2df4765b47.jpeg"
     }
   ]
 }
