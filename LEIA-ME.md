@@ -1,45 +1,38 @@
-# Daay Store — Correção do "produto não aparece"
+# Daay Store — Correção definitiva (produto agora atualiza)
 
-## Por que o produto não aparecia
-O site lia os produtos direto do GitHub, que tem um CACHE de vários minutos.
-Então o produto novo demorava (ou parecia não aparecer). Resolvido: agora o
-site lê os produtos do próprio Cloudflare, que atualiza na hora a cada save.
+## O que estava errado
+Faltava o arquivo de configuração do Worker (wrangler.toml). Sem ele, o Cloudflare
+servia uma versão fixa e não atualizava. Agora vai: o Worker serve o site e tem
+uma rota /api/produtos que sempre lê a lista mais recente.
 
-## ⚠️ PASSO OBRIGATÓRIO no Cloudflare (faça uma vez só)
-Para o site atualizar sozinho, é preciso ligar o "build". Sem isso, produto novo
-continua não aparecendo. Faça assim:
+## COMO SUBIR (faça uma vez)
+1. No GitHub, suba a pasta inteira por cima do que está lá
+   (Add file > Upload files > arraste tudo > Commit).
+   Arquivos NOVOS importantes: wrangler.toml, worker.js, build.js, .assetsignore
+   (a pasta "functions" foi removida — pode apagar no GitHub se ainda existir).
 
-1. Entre no painel do Cloudflare > seu projeto (daaystore).
-2. Vá em Settings (Configurações) > Builds & deployments (ou "Build").
-3. Em "Build command" (Comando de build), coloque exatamente:
-       node build.js
-4. Em "Build output directory" (Diretório de saída), deixe:
-       .
-   (um ponto, significa a pasta raiz)
-5. Salve.
-6. Vá em Deployments e clique em "Retry deployment" (ou faça um commit qualquer)
-   para rodar o build pela primeira vez.
+2. No Cloudflare, confirme as configurações de Build (Settings > Build):
+   - Build command:  node build.js
+   - Deploy command: npx wrangler deploy
+   - Root directory: /
+   Isso já estava assim no seu print — está correto. Só clique em Update se mudar algo.
 
-Pronto. A partir daí, toda vez que ela salvar um produto no painel, o Cloudflare
-gera a lista atualizada e o produto aparece no site em ~1 minuto.
+3. Vá em Deployments e clique em "Retry deployment" (ou "Create deployment")
+   para publicar com a configuração nova.
 
-## Como subir no GitHub
-Suba a pasta inteira por cima do que está lá (Add file > Upload files > arraste
-tudo > Commit). Arquivos novos/alterados nesta versão:
-- index.html              (lê os produtos do jeito certo)
-- functions/api/produtos.js  (NOVO - monta a lista atualizada)
-- build.js                (NOVO - gera a lista a cada deploy)
-- dados/produtos/...      (cada produto em seu arquivo)
+## Como testar
+1. Abra o site: deve continuar funcionando normal.
+2. Entre no /admin, adicione um produto e Salve.
+3. Aguarde ~1-2 min (o Cloudflare republica) e atualize o site.
+4. O produto novo deve aparecer.
 
 ## Como ela usa (resumo)
-1. Site + /admin > entra com o token do GitHub.
-2. Produtos > New (novo) ou toca num produto para editar.
-   - Foto: toca no campo e envia do celular.
-   - Categoria: escolhe no menu.
-   - Ordem: número menor aparece primeiro.
-   - "Mostrar no site": desliga para esconder sem apagar.
-3. Save/Publish. Em ~1 min aparece no site.
+- Site + /admin > entra com o token do GitHub.
+- Produtos > New (novo) ou toca para editar. Foto: toca e envia do celular.
+  Categoria: escolhe no menu. Ordem: número menor aparece primeiro.
+  "Mostrar no site": desliga para esconder sem apagar.
+- Save. Em ~1-2 min aparece no site.
 
-## Se mesmo assim demorar
-Pode ser o navegador dela. Peça para atualizar a página segurando para recarregar
-(ou abrir em aba anônima). O conteúdo novo aparece logo após o deploy terminar.
+## Importante
+Cada produto é um arquivo separado (pasta dados/produtos), então NUNCA mais
+um some quando outro é adicionado.
