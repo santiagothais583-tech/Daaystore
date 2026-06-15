@@ -9,10 +9,50 @@ public_folder: "/imagens/produtos"
 
 locale: "pt"
 
+# Mensagens de commit mais claras no histórico
+slug:
+  encoding: "ascii"
+  clean_accents: true
+
 collections:
-  # ----------------------------------------------------------
+  # ============ PRODUTOS (cada um em seu arquivo: nunca somem) ============
+  - name: "produtos"
+    label: "Produtos"
+    label_singular: "Produto"
+    icon: "page"
+    folder: "dados/produtos"
+    create: true
+    extension: "json"
+    format: "json"
+    slug: "{{fields.ordem}}-{{slug}}"
+    summary: "{{nome}} — R$ {{preco}}  ·  {{categoria}}"
+    sortable_fields: ["ordem", "nome", "preco", "categoria"]
+    view_filters:
+      - { label: "Lingerie", field: "categoria", pattern: "Lingerie" }
+      - { label: "Babydoll", field: "categoria", pattern: "Babydoll" }
+      - { label: "Camisolas", field: "categoria", pattern: "Camisolas" }
+      - { label: "Sexy Shop", field: "categoria", pattern: "Sexy Shop" }
+    fields:
+      - { name: "nome", label: "Nome do produto", widget: "string" }
+      - name: "categoria"
+        label: "Categoria"
+        widget: "select"
+        options: ["Lingerie", "Babydoll", "Camisolas", "Sexy Shop"]
+        hint: "Escolha a categoria. Para criar novas, fale com o responsável pelo site."
+      - { name: "preco", label: "Preço (apenas o valor, ex: 89,90)", widget: "string" }
+      - { name: "descricao", label: "Descrição", widget: "text", required: false }
+      - label: "Foto do produto"
+        name: "foto"
+        widget: "image"
+        required: false
+        choose_url: true
+        hint: "Toque para enviar uma foto do celular ou computador."
+      - { name: "ordem", label: "Ordem (menor aparece primeiro)", widget: "number", default: 99, value_type: "int" }
+      - { name: "ativo", label: "Mostrar no site?", widget: "boolean", default: true }
+
+  # ============ INFORMAÇÕES DA LOJA ============
   - name: "config"
-    label: "1. Informações da Loja"
+    label: "Informações da Loja"
     icon: "settings"
     files:
       - name: "loja"
@@ -25,71 +65,18 @@ collections:
           - { name: "whatsapp", label: "WhatsApp (só números com 55, ex: 5547991843203)", widget: "string" }
           - { name: "instagram", label: "Link do Instagram", widget: "string", required: false }
           - { name: "endereco", label: "Endereço (opcional)", widget: "string", required: false }
-          - label: "Logo da loja"
-            name: "logo"
-            widget: "image"
-            required: false
-            hint: "Deixe em branco para manter a logo atual."
+          - { name: "logo", label: "Logo da loja", widget: "image", required: false, hint: "Deixe em branco para manter a logo atual." }
 
-  # ----------------------------------------------------------
+  # ============ APARÊNCIA ============
   - name: "aparencia"
-    label: "2. Aparência do Site"
+    label: "Aparência do Site"
     icon: "media-alt"
     files:
       - name: "design"
-        label: "Cores e Design"
+        label: "Cores e Destaque"
         file: "dados/design.json"
         fields:
-          - { name: "cor_principal", label: "Cor principal (rosa)", widget: "color", default: "#c98a93" }
-          - { name: "cor_clara", label: "Cor de fundo clara (nude)", widget: "color", default: "#f7e9e9" }
+          - { name: "cor_principal", label: "Cor principal", widget: "color", default: "#c98a93" }
+          - { name: "cor_clara", label: "Cor de fundo clara", widget: "color", default: "#f7e9e9" }
           - { name: "cor_texto", label: "Cor do texto", widget: "color", default: "#463a3c" }
-          - name: "banner_texto"
-            label: "Frase de destaque no topo (opcional)"
-            widget: "string"
-            required: false
-            hint: "Ex: Frete grátis acima de R$ 150. Deixe vazio para não mostrar."
-
-  # ----------------------------------------------------------
-  - name: "categorias"
-    label: "3. Categorias"
-    icon: "list-bullet"
-    files:
-      - name: "lista_categorias"
-        label: "Lista de Categorias"
-        file: "dados/categorias.json"
-        fields:
-          - name: "categorias"
-            label: "Categorias"
-            label_singular: "Categoria"
-            widget: "list"
-            summary: "{{fields.nome}}"
-            hint: "Crie, renomeie, reordene ou apague categorias. A ordem aqui é a ordem no menu do site."
-            fields:
-              - { name: "nome", label: "Nome da categoria", widget: "string" }
-
-  # ----------------------------------------------------------
-  - name: "catalogo"
-    label: "4. Produtos"
-    icon: "page"
-    files:
-      - name: "produtos"
-        label: "Lista de Produtos"
-        file: "dados/produtos.json"
-        fields:
-          - name: "produtos"
-            label: "Produtos"
-            label_singular: "Produto"
-            widget: "list"
-            summary: "{{fields.nome}} — R$ {{fields.preco}}"
-            fields:
-              - { name: "nome", label: "Nome do produto", widget: "string" }
-              - { name: "categoria", label: "Categoria (escreva igual ao nome cadastrado em Categorias)", widget: "string" }
-              - { name: "preco", label: "Preço (ex: 89,90)", widget: "string" }
-              - { name: "descricao", label: "Descrição curta (opcional)", widget: "text", required: false }
-              - label: "Foto do produto"
-                name: "foto"
-                widget: "image"
-                choose_url: true
-                media_library:
-                  config:
-                    max_file_size: 5242880
+          - { name: "banner_texto", label: "Frase de destaque no topo (opcional)", widget: "string", required: false }
