@@ -184,19 +184,35 @@ function whatsLink(t){return 'https://wa.me/'+WPP+'?text='+encodeURIComponent(t)
 
 async function getJSON(url){const r=await fetch(url,{cache:'no-store'});if(!r.ok)throw new Error(url);return r.json();}
 
-// Lê a lista de produtos da API do GitHub (sempre reflete o que está cadastrado)
+// Lê os produtos. Fonte principal: função /api/produtos do Cloudflare (sempre
+// atualizada porque o site republica a cada alteração no painel).
+// Fallbacks: índice local e, por último, a API do GitHub.
 async function carregarProdutos(){
-  const api='https://api.github.com/repos/'+REPO+'/contents/dados/produtos?ref='+BRANCH;
-  let arquivos=[];
+  // 1) Função do Cloudflare (ideal)
   try{
+    const r=await getJSON('/api/produtos?_='+Date.now());
+    if(r && Array.isArray(r.produtos) && r.produtos.length) return r.produtos;
+  }catch(e){}
+
+  // 2) Índice local + arquivos
+  try{
+    const idx=await getJSON('dados/produtos-index.json?_='+Date.now());
+    const arquivos=(idx.arquivos||[]).map(n=>'dados/produtos/'+n+'?_='+Date.now());
+    const itens=await Promise.all(arquivos.map(u=>getJSON(u).catch(()=>null)));
+    const lista=itens.filter(p=>p && p.nome && p.ativo!==false);
+    if(lista.length) return lista;
+  }catch(e){}
+
+  // 3) API do GitHub (último recurso)
+  try{
+    const api='https://api.github.com/repos/'+REPO+'/contents/dados/produtos?ref='+BRANCH;
     const lista=await getJSON(api+'&_='+Date.now());
-    arquivos=lista.filter(f=>f.name.endsWith('.json')).map(f=>f.download_url);
-  }catch(e){
-    // fallback: tenta um índice local, se existir
-    try{const idx=await getJSON('dados/produtos-index.json?_='+Date.now());arquivos=(idx.arquivos||[]).map(n=>'dados/produtos/'+n);}catch(_){}
-  }
-  const itens=await Promise.all(arquivos.map(u=>getJSON(u+(u.includes('?')?'&':'?')+'_='+Date.now()).catch(()=>null)));
-  return itens.filter(p=>p && p.nome && p.ativo!==false);
+    const urls=lista.filter(f=>f.name.endsWith('.json')).map(f=>f.download_url+'?_='+Date.now());
+    const itens=await Promise.all(urls.map(u=>getJSON(u).catch(()=>null)));
+    return itens.filter(p=>p && p.nome && p.ativo!==false);
+  }catch(e){}
+
+  return [];
 }
 
 function montarMenu(){
