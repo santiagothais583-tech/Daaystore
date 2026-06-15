@@ -63,9 +63,20 @@
   .card{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 6px 22px var(--shadow);transition:transform .35s ease, box-shadow .35s ease;display:flex;flex-direction:column;opacity:0;transform:translateY(16px);animation:rise .5s ease forwards;}
   @keyframes rise{to{opacity:1;transform:translateY(0);}}
   .card:hover{transform:translateY(-5px);box-shadow:0 16px 40px var(--shadow);}
-  .card-img{aspect-ratio:3/4;overflow:hidden;background:var(--nude);position:relative;}
+  .card-img{aspect-ratio:3/4;overflow:hidden;background:var(--nude);position:relative;cursor:zoom-in;}
   .card-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}
   .card:hover .card-img img{transform:scale(1.05);}
+
+  /* Lightbox (foto ampliada ao clicar) */
+  .lb{position:fixed;inset:0;background:rgba(40,30,33,0.92);z-index:100;display:none;align-items:center;justify-content:center;padding:20px;}
+  .lb.open{display:flex;animation:fade .2s ease;}
+  @keyframes fade{from{opacity:0;}to{opacity:1;}}
+  .lb img{max-width:92vw;max-height:82vh;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,0.5);object-fit:contain;}
+  .lb-info{position:absolute;bottom:22px;left:0;right:0;text-align:center;color:#fff;font-family:'Cormorant Garamond',serif;}
+  .lb-info .ln{font-size:24px;}
+  .lb-info .lp{font-size:18px;color:#f3c9cf;margin-top:2px;}
+  .lb-close{position:absolute;top:18px;right:20px;width:44px;height:44px;border:none;background:rgba(255,255,255,0.15);color:#fff;border-radius:50%;font-size:26px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+  .lb-close:hover{background:rgba(255,255,255,0.3);}
   .card-tag{position:absolute;top:11px;left:11px;background:rgba(255,255,255,0.93);color:var(--rose-deep);font-size:10px;letter-spacing:1.2px;text-transform:uppercase;padding:5px 11px;border-radius:50px;font-weight:500;}
   .card-body{padding:16px 16px 18px;text-align:center;display:flex;flex-direction:column;flex:1;}
   .card-nome{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;margin-bottom:3px;}
@@ -155,6 +166,12 @@
     <p id="f-whats"></p>
     <div class="f-credit">© <span id="f-ano"></span> Daay Store — Vista sua melhor versão</div>
   </footer>
+
+  <div class="lb" id="lightbox">
+    <button class="lb-close" id="lb-close" aria-label="Fechar">&times;</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-info"><div class="ln" id="lb-nome"></div><div class="lp" id="lb-preco"></div></div>
+  </div>
 
   <a class="float-whats" id="float-whats" target="_blank" aria-label="WhatsApp">
     <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
@@ -271,7 +288,7 @@ function render(){
       const link=whatsLink('Olá! Tenho interesse no produto: '+p.nome+' (R$ '+p.preco+'). Visto no site da '+LOJANOME+'.');
       const foto=p.foto||'imagens/logo.jpg';
       card.innerHTML=
-        '<div class="card-img"><span class="card-tag">'+esc(cat)+'</span><img src="'+esc(foto)+'" alt="'+esc(p.nome)+'" loading="lazy" onerror="this.src=\'imagens/logo.jpg\'"></div>'+
+        '<div class="card-img" onclick="abrirFoto(this)" data-foto="'+esc(foto)+'" data-nome="'+esc(p.nome)+'" data-preco="'+esc(p.preco)+'"><span class="card-tag">'+esc(cat)+'</span><img src="'+esc(foto)+'" alt="'+esc(p.nome)+'" loading="lazy" onerror="this.src=\'imagens/logo.jpg\'"></div>'+
         '<div class="card-body">'+
           '<div class="card-nome">'+esc(p.nome)+'</div>'+
           (p.descricao?'<div class="card-desc">'+esc(p.descricao)+'</div>':'')+
@@ -323,6 +340,24 @@ async function carregar(){
     console.error(e);
   }
 }
+
+// Lightbox: abrir foto ampliada ao clicar
+function abrirFoto(el){
+  const lb=document.getElementById('lightbox');
+  document.getElementById('lb-img').src=el.dataset.foto;
+  document.getElementById('lb-img').alt=el.dataset.nome||'';
+  document.getElementById('lb-nome').textContent=el.dataset.nome||'';
+  document.getElementById('lb-preco').textContent=el.dataset.preco?('R$ '+el.dataset.preco):'';
+  lb.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function fecharFoto(){
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('lb-close').addEventListener('click',fecharFoto);
+document.getElementById('lightbox').addEventListener('click',function(e){if(e.target===this)fecharFoto();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')fecharFoto();});
 
 document.getElementById('busca').addEventListener('input',function(e){termoBusca=e.target.value.toLowerCase().trim();render();});
 document.getElementById('nav-toggle').addEventListener('click',function(){document.getElementById('nav-menu').classList.toggle('open');});
