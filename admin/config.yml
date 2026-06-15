@@ -27,18 +27,17 @@ collections:
     slug: "{{fields.ordem}}-{{slug}}"
     summary: "{{nome}} — R$ {{preco}}  ·  {{categoria}}"
     sortable_fields: ["ordem", "nome", "preco", "categoria"]
-    view_filters:
-      - { label: "Lingerie", field: "categoria", pattern: "Lingerie" }
-      - { label: "Babydoll", field: "categoria", pattern: "Babydoll" }
-      - { label: "Camisolas", field: "categoria", pattern: "Camisolas" }
-      - { label: "Sexy Shop", field: "categoria", pattern: "Sexy Shop" }
     fields:
       - { name: "nome", label: "Nome do produto", widget: "string" }
       - name: "categoria"
         label: "Categoria"
-        widget: "select"
-        options: ["Lingerie", "Babydoll", "Camisolas", "Sexy Shop"]
-        hint: "Escolha a categoria. Para criar novas, fale com o responsável pelo site."
+        widget: "relation"
+        collection: "categorias"
+        file: "lista_categorias"
+        search_fields: ["categorias.*.nome"]
+        value_field: "categorias.*.nome"
+        display_fields: ["categorias.*.nome"]
+        hint: "Escolha uma categoria. Para criar novas, vá na seção 'Categorias' do menu."
       - { name: "preco", label: "Preço (apenas o valor, ex: 89,90)", widget: "string" }
       - { name: "descricao", label: "Descrição", widget: "text", required: false }
       - label: "Foto do produto"
@@ -49,6 +48,24 @@ collections:
         hint: "Toque para enviar uma foto do celular ou computador."
       - { name: "ordem", label: "Ordem (menor aparece primeiro)", widget: "number", default: 99, value_type: "int" }
       - { name: "ativo", label: "Mostrar no site?", widget: "boolean", default: true }
+
+  # ============ CATEGORIAS (crie e edite livremente) ============
+  - name: "categorias"
+    label: "Categorias"
+    icon: "list-bullet"
+    files:
+      - name: "lista_categorias"
+        label: "Lista de Categorias"
+        file: "dados/categorias.json"
+        fields:
+          - name: "categorias"
+            label: "Categorias"
+            label_singular: "Categoria"
+            widget: "list"
+            summary: "{{fields.nome}}"
+            hint: "Crie, renomeie, reordene ou apague. A ordem aqui é a ordem das seções no site. Ao renomear uma categoria, lembre de ajustar os produtos que a usavam."
+            fields:
+              - { name: "nome", label: "Nome da categoria", widget: "string" }
 
   # ============ INFORMAÇÕES DA LOJA ============
   - name: "config"

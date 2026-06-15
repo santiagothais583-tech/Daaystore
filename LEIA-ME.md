@@ -1,38 +1,23 @@
-# Daay Store — Correção definitiva (produto agora atualiza)
+# Daay Store — Agora você cria categorias pelo painel
 
-## O que estava errado
-Faltava o arquivo de configuração do Worker (wrangler.toml). Sem ele, o Cloudflare
-servia uma versão fixa e não atualizava. Agora vai: o Worker serve o site e tem
-uma rota /api/produtos que sempre lê a lista mais recente.
+## O que mudou
+- Nova seção **Categorias** no painel: crie, renomeie, reordene ou apague.
+- No produto, o campo **Categoria** agora é uma lista que lê das categorias
+  cadastradas. Criou uma categoria nova? Ela já aparece como opção no produto.
+- Seus 27 produtos e as 4 categorias atuais foram mantidos.
 
-## COMO SUBIR (faça uma vez)
-1. No GitHub, suba a pasta inteira por cima do que está lá
-   (Add file > Upload files > arraste tudo > Commit).
-   Arquivos NOVOS importantes: wrangler.toml, worker.js, build.js, .assetsignore
-   (a pasta "functions" foi removida — pode apagar no GitHub se ainda existir).
+## Como criar uma categoria nova
+1. Entre no /admin.
+2. Menu **Categorias** > Lista de Categorias.
+3. Clique para adicionar uma nova, digite o nome e **Save**.
+4. Agora, ao editar/criar um produto, essa categoria aparece no campo Categoria.
+5. O site cria a seção dessa categoria automaticamente quando houver produto nela.
 
-2. No Cloudflare, confirme as configurações de Build (Settings > Build):
-   - Build command:  node build.js
-   - Deploy command: npx wrangler deploy
-   - Root directory: /
-   Isso já estava assim no seu print — está correto. Só clique em Update se mudar algo.
+## Importante ao renomear/apagar categoria
+- Se você **renomear** uma categoria, os produtos que usavam o nome antigo
+  precisam ser ajustados para o novo nome (senão ficam "soltos").
+- Apagar uma categoria não apaga os produtos; eles só deixam de ter aquela seção.
 
-3. Vá em Deployments e clique em "Retry deployment" (ou "Create deployment")
-   para publicar com a configuração nova.
-
-## Como testar
-1. Abra o site: deve continuar funcionando normal.
-2. Entre no /admin, adicione um produto e Salve.
-3. Aguarde ~1-2 min (o Cloudflare republica) e atualize o site.
-4. O produto novo deve aparecer.
-
-## Como ela usa (resumo)
-- Site + /admin > entra com o token do GitHub.
-- Produtos > New (novo) ou toca para editar. Foto: toca e envia do celular.
-  Categoria: escolhe no menu. Ordem: número menor aparece primeiro.
-  "Mostrar no site": desliga para esconder sem apagar.
-- Save. Em ~1-2 min aparece no site.
-
-## Importante
-Cada produto é um arquivo separado (pasta dados/produtos), então NUNCA mais
-um some quando outro é adicionado.
+## Como subir no GitHub
+Suba a pasta por cima do que está lá (Add file > Upload files > arraste > Commit).
+O arquivo principal alterado é admin/config.yml. Em ~1-2 min o site republica.
