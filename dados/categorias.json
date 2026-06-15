@@ -1,8 +1,19 @@
 {
   "categorias": [
-    { "nome": "Lingerie" },
-    { "nome": "Babydoll" },
-    { "nome": "Camisolas" },
-    { "nome": "Sexy Shop" }
+    {
+      "nome": "Lingerie"
+    },
+    {
+      "nome": "Babydoll"
+    },
+    {
+      "nome": "Camisolas"
+    },
+    {
+      "nome": "Sexy Shop"
+    },
+    {
+      "nome": "Pijamas"
+    }
   ]
 }
