@@ -41,6 +41,13 @@
       "preco": "139,99",
       "descricao": "Em cores: preto e vermelho",
       "foto": "/imagens/produtos/07bd7e3d-25b5-48ab-af7b-d7dad06c5357.jpeg"
+    },
+    {
+      "nome": "LOVE LUB",
+      "categoria": "Sexy shop",
+      "preco": "24,99",
+      "descricao": "",
+      "foto": "/imagens/produtos/8820a979-d0cd-4345-b8b5-fa5cbb99d3ab.jpeg"
     }
   ]
 }
