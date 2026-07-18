@@ -1,0 +1,9 @@
+{
+  "nome": "Conjunto velvet",
+  "categoria": "Lingerie",
+  "preco": "119,99",
+  "descricao": "Lingerie",
+  "foto": "/imagens/produtos/IMG_7156.jpeg",
+  "ordem": 99,
+  "ativo": true
+}
