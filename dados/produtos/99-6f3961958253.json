@@ -1,0 +1,9 @@
+{
+  "nome": "Conjunto",
+  "categoria": "Lingerie",
+  "preco": "109,99",
+  "descricao": "Cnj",
+  "foto": "/imagens/produtos/IMG_8483.jpeg",
+  "ordem": 99,
+  "ativo": true
+}
